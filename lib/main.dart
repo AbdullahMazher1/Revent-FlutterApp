@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'screens/SignIn.dart';
 import 'screens/SignUp.dart';
+import 'screens/Interface.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/SignIn': (context) => SignIn(),
         '/SignUp': (context) => SignUp(),
+        '/Interface': (context) => EventScreen(),
       },
     );
   }

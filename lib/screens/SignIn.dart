@@ -13,7 +13,8 @@ class SignIn extends StatelessWidget {
         children: [
           Center(
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 90, vertical: 10),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -61,7 +62,9 @@ class SignIn extends StatelessWidget {
                     child: Column(
                       children: [
                         ElevatedButton(
-                          onPressed: () => SignIn.new,
+                          onPressed: () => {
+                            Navigator.pushNamed(context, '/Interface'),
+                          },
                           style: ElevatedButton.styleFrom(
                             fixedSize: const Size(100, 25),
                             shape: RoundedRectangleBorder(

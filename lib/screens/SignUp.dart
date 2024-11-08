@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:frontend/constants.dart';
+import 'GoogleSighnApi.dart';
 
 class SignUp extends StatelessWidget {
   @override
@@ -110,7 +112,7 @@ class SignUp extends StatelessWidget {
                     height: 20,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: handleSignIn,
                     child: DecoratedBox(
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -161,4 +163,8 @@ class SignUp extends StatelessWidget {
       ),
     );
   }
+}
+
+Future handleSignIn() async {
+  await GoogleSignInApi.login();
 }
