@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'screens/SignIn.dart';
 import 'screens/SignUp.dart';
 import 'screens/Interface.dart';
+import 'screens/Event.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         '/SignIn': (context) => SignIn(),
         '/SignUp': (context) => SignUp(),
         '/Interface': (context) => EventScreen(),
+        '/Event': (context) => Events(),
       },
     );
   }

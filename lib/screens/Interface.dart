@@ -6,7 +6,18 @@ class EventScreen extends StatefulWidget {
   _EventScreenState createState() => _EventScreenState();
 }
 
+int currentIndex = 0;
+
 class _EventScreenState extends State<EventScreen> {
+  void _callScreen(int index) {
+    setState(() {
+      currentIndex = index;
+      if (currentIndex == 2) {
+        Navigator.pushNamed(context, '/Event');
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -159,6 +170,7 @@ class _EventScreenState extends State<EventScreen> {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.purple,
         unselectedItemColor: Colors.grey,
+        onTap: _callScreen,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
@@ -219,7 +231,7 @@ class EventCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
-            child: Image.network(
+            child: Image.asset(
               imageUrl,
               height: 250,
               width: double.infinity,
@@ -281,7 +293,7 @@ class RelatedEventCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: Image.network(
+            child: Image.asset(
               imageUrl,
               height: 100,
               width: 100,
