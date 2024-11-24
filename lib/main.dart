@@ -26,6 +26,9 @@ class MyApp extends StatelessWidget {
         '/SignUp': (context) => SignUp(),
         '/Interface': (context) => EventScreen(),
         '/Event': (context) => Events(),
+        '/EventsDisp': (context) => EventsDisp(),
+        '/EventsDate': (context) => EventsDate(),
+        '/EventsLocation': (context) => EventsLocation(),
       },
     );
   }
