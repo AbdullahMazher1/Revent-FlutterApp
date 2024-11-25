@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 String eventName = "";
 String eventDescription = "";
@@ -28,16 +27,14 @@ class _EventsState extends State<Events> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/images/e3.png',
+              'assets/images/e5.png',
               width: 300,
-              height: 300,
+              height: 320,
               fit: BoxFit.cover,
             ),
-            SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 20),
                 Text(
                   'Give your',
                   style: GoogleFonts.inter(
@@ -64,9 +61,9 @@ class _EventsState extends State<Events> {
                 )
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 100, vertical: 0),
+              padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 0),
               child: TextField(
                 controller: _eventNameController,
                 decoration: const InputDecoration(
@@ -82,7 +79,7 @@ class _EventsState extends State<Events> {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                 ),
-                groupId: Icon(Icons.person,
+                groupId: const Icon(Icons.person,
                     color: Color.fromARGB(255, 176, 116, 231)),
               ),
             ),
@@ -109,12 +106,12 @@ class _EventsState extends State<Events> {
           eventName = _eventNameController.text;
           Navigator.pushNamed(context, '/EventsDisp');
         },
-        child: Icon(
+        child: const Icon(
           Icons.arrow_forward,
           color: Colors.purple,
         ),
         tooltip: 'Next',
-        shape: CircleBorder(),
+        shape: const CircleBorder(),
         mini: false,
       ),
     );
@@ -144,12 +141,11 @@ class _EventsDispState extends State<EventsDisp> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/images/e3.png',
-              width: 300,
-              height: 300,
-              fit: BoxFit.cover,
+              'assets/images/e6.png',
+              width: 250,
+              height: 250,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -180,9 +176,9 @@ class _EventsDispState extends State<EventsDisp> {
                 )
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 100, vertical: 0),
+              padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 0),
               child: TextField(
                 controller: _eventDescriptionController,
                 decoration: const InputDecoration(
@@ -201,15 +197,15 @@ class _EventsDispState extends State<EventsDisp> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 110, vertical: 0),
+              padding: const EdgeInsets.symmetric(horizontal: 110, vertical: 0),
               child: Column(
                 children: [
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   LinearProgressIndicator(
                     value: 0.50,
                     backgroundColor: Colors.grey[200],
                     valueColor:
-                        AlwaysStoppedAnimation<Color>(const Color(0xFF8C54B8)),
+                        const AlwaysStoppedAnimation<Color>(Color(0xFF8C54B8)),
                   ),
                 ],
               ),
@@ -223,12 +219,12 @@ class _EventsDispState extends State<EventsDisp> {
           eventDescription = _eventDescriptionController.text;
           Navigator.pushNamed(context, '/EventsDate');
         },
-        child: Icon(
+        child: const Icon(
           Icons.arrow_forward,
           color: Colors.purple,
         ),
         tooltip: 'Next',
-        shape: CircleBorder(),
+        shape: const CircleBorder(),
         mini: false,
       ),
     );
@@ -268,11 +264,10 @@ class _EventsDateState extends State<EventsDate> {
           children: [
             Image.asset(
               'assets/images/e3.png',
-              width: 300,
-              height: 300,
-              fit: BoxFit.cover,
+              width: 250,
+              height: 280,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -303,7 +298,7 @@ class _EventsDateState extends State<EventsDate> {
                 )
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 100),
               child: GestureDetector(
@@ -313,9 +308,9 @@ class _EventsDateState extends State<EventsDate> {
                   width: 270,
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   decoration: BoxDecoration(
-                    border:
-                        Border.all(color: Color.fromARGB(255, 176, 116, 231)),
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 176, 116, 231)),
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -328,27 +323,27 @@ class _EventsDateState extends State<EventsDate> {
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                           color: _selectedDate == null
-                              ? Color.fromARGB(255, 110, 110, 110)
+                              ? const Color.fromARGB(255, 110, 110, 110)
                               : Colors.black,
                         ),
                       ),
-                      Icon(Icons.calendar_today,
-                          color: const Color.fromARGB(255, 176, 116, 231)),
+                      const Icon(Icons.calendar_today,
+                          color: Color.fromARGB(255, 176, 116, 231)),
                     ],
                   ),
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 110, vertical: 0),
+              padding: const EdgeInsets.symmetric(horizontal: 110, vertical: 0),
               child: Column(
                 children: [
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   LinearProgressIndicator(
                     value: 0.75,
                     backgroundColor: Colors.grey[200],
                     valueColor:
-                        AlwaysStoppedAnimation<Color>(const Color(0xFF8C54B8)),
+                        const AlwaysStoppedAnimation<Color>(Color(0xFF8C54B8)),
                   ),
                 ],
               ),
@@ -362,12 +357,12 @@ class _EventsDateState extends State<EventsDate> {
           //_selectedDate
           Navigator.pushNamed(context, '/EventsLocation');
         },
-        child: Icon(
+        child: const Icon(
           Icons.arrow_forward,
           color: Colors.purple,
         ),
         tooltip: 'Next',
-        shape: CircleBorder(),
+        shape: const CircleBorder(),
         mini: false,
       ),
     );
@@ -380,56 +375,6 @@ class EventsLocation extends StatefulWidget {
 }
 
 class _EventsLocationState extends State<EventsLocation> {
-  LatLng? _selectedLocation;
-
-  void _selectLocation(LatLng location) {
-    setState(() {
-      _selectedLocation = location;
-    });
-  }
-
-  Future<void> _openMapDialog(BuildContext context) async {
-    LatLng? pickedLocation = await showDialog<LatLng>(
-      context: context,
-      builder: (BuildContext context) {
-        LatLng? tempLocation;
-        return AlertDialog(
-          title: Text(
-            "Select Event Location",
-            style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
-          ),
-          content: Container(
-            width: double.maxFinite,
-            height: 300,
-            child: GoogleMap(
-              initialCameraPosition: CameraPosition(
-                target: LatLng(37.7749, -122.4194),
-                zoom: 12,
-              ),
-              onTap: (LatLng location) {
-                tempLocation = location;
-              },
-            ),
-          ),
-          actions: [
-            TextButton(
-              child: Text("Cancel", style: TextStyle(color: Colors.red)),
-              onPressed: () => Navigator.pop(context),
-            ),
-            TextButton(
-              child: Text("Confirm"),
-              onPressed: () => Navigator.pop(context, tempLocation),
-            ),
-          ],
-        );
-      },
-    );
-
-    if (pickedLocation != null) {
-      _selectLocation(pickedLocation);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -439,16 +384,15 @@ class _EventsLocationState extends State<EventsLocation> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/images/e3.png',
-              width: 300,
-              height: 300,
-              fit: BoxFit.cover,
+              'assets/images/location.png',
+              height: 300.0,
+              width: 300.0,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 0),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 10),
+                const SizedBox(height: 0),
                 Text(
                   'Give your',
                   style: GoogleFonts.inter(
@@ -475,52 +419,46 @@ class _EventsLocationState extends State<EventsLocation> {
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 100),
               child: GestureDetector(
-                onTap: () => _openMapDialog(context),
                 child: Container(
                   height: 50,
                   width: 270,
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   decoration: BoxDecoration(
-                    border:
-                        Border.all(color: Color.fromARGB(255, 176, 116, 231)),
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 176, 116, 231)),
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        _selectedLocation == null
-                            ? 'Tap to select the location'
-                            : 'Lat: ${_selectedLocation!.latitude.toStringAsFixed(2)}, Lng: ${_selectedLocation!.longitude.toStringAsFixed(2)}',
+                        'Tap to select the location',
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: _selectedLocation == null
-                              ? Color.fromARGB(255, 110, 110, 110)
-                              : Colors.black,
                         ),
                       ),
                       Icon(Icons.location_on,
-                          color: const Color.fromARGB(255, 176, 116, 231)),
+                          color: Color.fromARGB(255, 176, 116, 231)),
                     ],
                   ),
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 110, vertical: 0),
+              padding: const EdgeInsets.symmetric(horizontal: 110, vertical: 0),
               child: Column(
                 children: [
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   LinearProgressIndicator(
                     value: 1,
                     backgroundColor: Colors.grey[200],
                     valueColor:
-                        AlwaysStoppedAnimation<Color>(const Color(0xFF8C54B8)),
+                        const AlwaysStoppedAnimation<Color>(Color(0xFF8C54B8)),
                   ),
                 ],
               ),
@@ -533,12 +471,12 @@ class _EventsLocationState extends State<EventsLocation> {
         onPressed: () {
           //_selectedLocation
         },
-        child: Icon(
+        child: const Icon(
           Icons.arrow_forward,
           color: Colors.purple,
         ),
         tooltip: 'Next',
-        shape: CircleBorder(),
+        shape: const CircleBorder(),
         mini: false,
       ),
     );

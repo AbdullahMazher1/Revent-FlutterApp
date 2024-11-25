@@ -36,6 +36,7 @@ dependencies:
   intl: ^0.18.0
   fluttertoast: ^8.0.9
   google_maps_flutter: ^2.3.0
+  flutter_svg: ^2.0.0
 
 
 dev_dependencies:
@@ -64,15 +65,14 @@ flutter:
     - assets/images/a.jpg
     - assets/images/b.jpg
     - assets/images/c.jpg
-    - assets/images/e1.png
-    - assets/images/e2.png
+    - assets/images/e1.svg
+    - assets/images/e2.svg
     - assets/images/e3.png
-    - assets/images/e4.png
     - assets/images/e5.png
     - assets/images/e6.png
-    - assets/images/event.png
     - assets/images/main.jpg
     - assets/images/z1.jpg
+    - assets/images/location.png
     - assets/images/z2.jpg
     - assets/fonts/Poppins-Regular.ttf
     - assets/fonts/Poppins-Bold.ttf
