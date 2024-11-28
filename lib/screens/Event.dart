@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 String eventName = "";
 String eventDescription = "";
@@ -375,105 +377,87 @@ class EventsLocation extends StatefulWidget {
 }
 
 class _EventsLocationState extends State<EventsLocation> {
+  GoogleMapController? mapController;
+  LatLng _center = const LatLng(37.7749, -122.4194); // Default to San Francisco
+  LatLng _pickedLocation =
+      const LatLng(37.7749, -122.4194); // Default pick location
+  Set<Marker> _markers = {};
+
+  @override
+  void initState() {
+    super.initState();
+    _checkPermissions();
+  }
+
+  Future<void> _checkPermissions() async {
+    PermissionStatus status = await Permission.location.request();
+    if (status.isDenied) {
+      // Handle the case where permission is denied
+      print('Location permission denied');
+    } else {
+      // Location permission granted
+      print('Location permission granted');
+    }
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
+
+  void _onTap(LatLng location) {
+    setState(() {
+      _pickedLocation = location;
+      _markers = {
+        Marker(
+          markerId: MarkerId("selected_location"),
+          position: _pickedLocation,
+        ),
+      };
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/images/location.png',
-              height: 300.0,
-              width: 300.0,
-            ),
-            const SizedBox(height: 0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 0),
-                Text(
-                  'Give your',
-                  style: GoogleFonts.inter(
-                    fontSize: 18,
-                    color: const Color(0xFF333333),
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-                Text(
-                  ' Event ',
-                  style: GoogleFonts.poppins(
-                    fontSize: 20,
-                    color: const Color(0xFF8C54B8),
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                Text(
-                  'a Location',
-                  style: GoogleFonts.inter(
-                    fontSize: 18,
-                    color: const Color(0xFF333333),
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 100),
-              child: GestureDetector(
-                child: Container(
-                  height: 50,
-                  width: 270,
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 176, 116, 231)),
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Tap to select the location',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Icon(Icons.location_on,
-                          color: Color.fromARGB(255, 176, 116, 231)),
-                    ],
-                  ),
-                ),
+      appBar: AppBar(
+        title: const Text("Select Event Location"),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: GoogleMap(
+              onMapCreated: _onMapCreated,
+              initialCameraPosition: CameraPosition(
+                target: _center,
+                zoom: 10.0,
               ),
+              onTap: _onTap,
+              markers: _markers,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 110, vertical: 0),
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
-                  LinearProgressIndicator(
-                    value: 1,
-                    backgroundColor: Colors.grey[200],
-                    valueColor:
-                        const AlwaysStoppedAnimation<Color>(Color(0xFF8C54B8)),
-                  ),
-                ],
-              ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                // Handle selected location
+                print(
+                    "Selected Location: ${_pickedLocation.latitude}, ${_pickedLocation.longitude}");
+              },
+              child: const Text("Confirm Location"),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color.fromARGB(255, 243, 243, 243),
+        backgroundColor: Colors.purple,
         onPressed: () {
-          //_selectedLocation
+          // Proceed with the selected location
+          print(
+              'Selected Location: ${_pickedLocation.latitude}, ${_pickedLocation.longitude}');
         },
         child: const Icon(
           Icons.arrow_forward,
-          color: Colors.purple,
+          color: Colors.white,
         ),
         tooltip: 'Next',
         shape: const CircleBorder(),
