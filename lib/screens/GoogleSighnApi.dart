@@ -3,7 +3,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 class GoogleSignInApi {
   static final _googleSignIn = GoogleSignIn(
       clientId:
-          '373596999346-7jb70ftrlplults4gkae6j30ria3ks8p.apps.googleusercontent.com');
+          '222690904040-dg4dqctqdfqsvfgm7ahpo3ts7lk0pust.apps.googleusercontent.com');
 
   static Future<GoogleSignInAccount?> login() => _googleSignIn.signIn();
 
