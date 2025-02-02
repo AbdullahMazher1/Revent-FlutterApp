@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/EventTickets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'screens/SignIn.dart';
 import 'screens/SignUp.dart';
 import 'screens/Interface.dart';
 import 'screens/Event.dart';
+import 'screens/UserScreen.dart';
+import 'screens/EventDetails.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,6 +32,9 @@ class MyApp extends StatelessWidget {
         '/EventsDisp': (context) => EventsDisp(),
         '/EventsDate': (context) => EventsDate(),
         '/EventsLocation': (context) => EventsLocation(),
+        '/UserScreen': (context) => UserScreen(),
+        '/EventDetails': (context) => EventDetails(),
+        '/EventTickets': (context) => EventsTicket(),
       },
     );
   }
@@ -40,7 +46,7 @@ class FirstScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:frontend/constants.dart';
 import 'GoogleSighnApi.dart';
 
@@ -15,7 +14,7 @@ class SignUp extends StatelessWidget {
         children: [
           Center(
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 90, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -149,7 +148,7 @@ class SignUp extends StatelessWidget {
             ),
           ),
           Positioned(
-            right: 80,
+            right: 30,
             top: 100,
             child: IgnorePointer(
               child: Image.asset(

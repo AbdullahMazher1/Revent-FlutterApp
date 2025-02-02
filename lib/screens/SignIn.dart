@@ -13,8 +13,7 @@ class SignIn extends StatelessWidget {
         children: [
           Center(
             child: Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -128,7 +127,7 @@ class SignIn extends StatelessWidget {
             ),
           ),
           Positioned(
-            right: -20,
+            right: -50,
             top: 32,
             child: IgnorePointer(
               child: Image.asset(

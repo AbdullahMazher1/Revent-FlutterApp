@@ -15,6 +15,9 @@ class _EventScreenState extends State<EventScreen> {
       if (currentIndex == 2) {
         Navigator.pushNamed(context, '/Event');
       }
+      if (currentIndex == 4) {
+        Navigator.pushNamed(context, '/UserScreen');
+      }
     });
   }
 

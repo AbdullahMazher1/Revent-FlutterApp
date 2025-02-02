@@ -59,6 +59,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/01.png
+    - assets/images/ticket.png
     - assets/images/02.png
     - assets/images/03.png
     - assets/images/04.png

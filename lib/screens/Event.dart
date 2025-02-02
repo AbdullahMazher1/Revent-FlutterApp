@@ -65,7 +65,7 @@ class _EventsState extends State<Events> {
             ),
             const SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 0),
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 0),
               child: TextField(
                 controller: _eventNameController,
                 decoration: const InputDecoration(
@@ -180,7 +180,7 @@ class _EventsDispState extends State<EventsDisp> {
             ),
             const SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 0),
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 0),
               child: TextField(
                 controller: _eventDescriptionController,
                 decoration: const InputDecoration(
@@ -302,7 +302,7 @@ class _EventsDateState extends State<EventsDate> {
             ),
             const SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 100),
+              padding: const EdgeInsets.symmetric(horizontal: 50),
               child: GestureDetector(
                 onTap: () => _selectDate(context),
                 child: Container(
@@ -423,7 +423,7 @@ class _EventsLocationState extends State<EventsLocation> {
             ),
             const SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 100),
+              padding: const EdgeInsets.symmetric(horizontal: 50),
               child: GestureDetector(
                 child: Container(
                   height: 50,
@@ -472,6 +472,7 @@ class _EventsLocationState extends State<EventsLocation> {
         backgroundColor: const Color.fromARGB(255, 243, 243, 243),
         onPressed: () {
           //_selectedLocation
+          Navigator.pushNamed(context, '/EventsTicket');
         },
         child: const Icon(
           Icons.arrow_forward,
