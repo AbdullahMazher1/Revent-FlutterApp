@@ -74,7 +74,7 @@ class EventDetails extends StatelessWidget {
                 Icon(Icons.calendar_today, color: themeColor, size: 20),
                 SizedBox(width: 6),
                 Text(
-                  'Date & Time: September 10, 2024 - 5:00 PM',
+                  'Date & Time: September 10, 2024',
                   style: GoogleFonts.poppins(
                     fontSize: 15,
                     color: Colors.black,
@@ -89,6 +89,20 @@ class EventDetails extends StatelessWidget {
                 SizedBox(width: 6),
                 Text(
                   'Created On: August 20, 2024',
+                  style: GoogleFonts.poppins(
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            Row(
+              children: [
+                Icon(Icons.airplay, color: themeColor, size: 20),
+                SizedBox(width: 6),
+                Text(
+                  'Tickets Sold: 122/200',
                   style: GoogleFonts.poppins(
                     fontSize: 15,
                     color: Colors.black,

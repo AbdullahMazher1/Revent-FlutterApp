@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '/screens/bottom_navbar.dart';
+import '/screens/editScreen.dart';
 
 class UserScreen extends StatefulWidget {
   @override
@@ -11,9 +12,21 @@ class _UserScreenState extends State<UserScreen> {
   final Color themeColor = const Color(0xFF8C54B8);
   int _selectedIndex = 4;
 
+  String currentName = 'Alina';
+  String currentBio = 'Hey! I am using Revent.';
+  String currentProfilePic = 'assets/images/p.jpg';
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+    });
+  }
+
+  void _updateUserInfo(Map<String, dynamic> newUserInfo) {
+    setState(() {
+      currentName = newUserInfo['name'] ?? currentName;
+      currentBio = newUserInfo['bio'] ?? currentBio;
+      currentProfilePic = newUserInfo['profilePic'] ?? currentProfilePic;
     });
   }
 
@@ -31,12 +44,12 @@ class _UserScreenState extends State<UserScreen> {
               backgroundColor: themeColor,
               child: CircleAvatar(
                 radius: 50,
-                backgroundImage: AssetImage('assets/images/p.jpg'),
+                backgroundImage: AssetImage(currentProfilePic),
               ),
             ),
             SizedBox(height: 10),
             Text(
-              'Alina',
+              currentName,
               style: GoogleFonts.inter(
                 fontSize: 24,
                 fontWeight: FontWeight.w700,
@@ -45,7 +58,7 @@ class _UserScreenState extends State<UserScreen> {
             ),
             SizedBox(height: 5),
             Text(
-              'Hey! I am using Revent.',
+              currentBio,
               style: GoogleFonts.poppins(
                 fontSize: 16,
                 color: Colors.grey[600],
@@ -54,14 +67,28 @@ class _UserScreenState extends State<UserScreen> {
             ),
             SizedBox(height: 15),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () async {
+                final result = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditScreen(
+                      currentName: currentName,
+                      currentBio: currentBio,
+                      currentProfilePic: currentProfilePic,
+                    ),
+                  ),
+                );
+                if (result != null && result is Map<String, dynamic>) {
+                  _updateUserInfo(result);
+                }
+              },
               icon: Icon(Icons.edit, color: Colors.white),
               label: Text('Edit Profile'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: themeColor,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
             ),
@@ -90,7 +117,7 @@ class _UserScreenState extends State<UserScreen> {
                           cursor: SystemMouseCursors.click,
                           child: Container(
                             margin: EdgeInsets.only(right: 15),
-                            width: MediaQuery.of(context).size.width * 0.3,
+                            width: MediaQuery.of(context).size.width * 0.4,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
                               color: themeColor.withOpacity(0.15),

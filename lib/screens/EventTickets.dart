@@ -8,11 +8,14 @@ class EventsTicket extends StatefulWidget {
 
 class _EventsTicketState extends State<EventsTicket> {
   TextEditingController _ticketPriceController = TextEditingController();
+  TextEditingController _ticketNumberController = TextEditingController();
   String? selectedCurrency;
 
   @override
   void dispose() {
     _ticketPriceController.dispose();
+    super.dispose();
+    _ticketNumberController.dispose();
     super.dispose();
   }
 
@@ -68,6 +71,17 @@ class _EventsTicketState extends State<EventsTicket> {
                     controller: _ticketPriceController,
                     decoration: const InputDecoration(
                       labelText: 'Enter ticket price',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                    ),
+                    keyboardType: TextInputType.number,
+                  ),
+                  SizedBox(height: 10),
+                  TextField(
+                    controller: _ticketNumberController,
+                    decoration: const InputDecoration(
+                      labelText: 'Number of Tickets',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
