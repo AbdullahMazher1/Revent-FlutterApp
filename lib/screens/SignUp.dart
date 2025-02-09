@@ -165,10 +165,14 @@ class SignUp extends StatelessWidget {
 }
 
 Future<void> handleSignIn() async {
-  final user = await GoogleSignInApi.login();
-  if (user != null) {
-    print("Signed in successfully: ${user.displayName}");
-  } else {
-    print("Sign-in failed or canceled");
+  try{
+    final user = await GoogleSignInApi.login();
+    if (user != null) {
+      print("Signed in successfully: ${user.displayName}");
+    } else {
+      print("Sign-in failed or canceled");
+    }
+  }catch(e){
+    print(e.toString());
   }
 }
