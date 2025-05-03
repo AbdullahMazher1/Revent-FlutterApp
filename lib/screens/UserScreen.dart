@@ -18,6 +18,8 @@ class _UserScreenState extends State<UserScreen> {
 
   String eventName = ''; 
   String eventDescription = ''; 
+  DateTime? eventDate;
+  String eventLocation = '';
 
   @override
   void didChangeDependencies() {
@@ -26,6 +28,8 @@ class _UserScreenState extends State<UserScreen> {
     if (args != null) {
       eventName = args['eventName'] ?? '';
       eventDescription = args['eventDescription'] ?? '';
+      eventDate = args['eventDate'] ?? '';
+      eventLocation = args['eventLocation'] ?? '';
     }
   }
 
@@ -203,7 +207,7 @@ class _UserScreenState extends State<UserScreen> {
                                   Text(
                                     eventName.isEmpty
                                         ? 'Event Title ${index + 1}'
-                                        : eventName,  // Use eventName if available
+                                        : eventName,  
                                     style: GoogleFonts.inter(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w700,
@@ -216,7 +220,7 @@ class _UserScreenState extends State<UserScreen> {
                               Text(
                                 eventDescription.isEmpty
                                     ? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum. Donec vehicula.'
-                                    : eventDescription,  // Use eventDescription if available
+                                    : eventDescription,  
                                 style: GoogleFonts.poppins(
                                   fontSize: 14,
                                   color: Colors.grey[700],
@@ -232,7 +236,13 @@ class _UserScreenState extends State<UserScreen> {
                                   child: ElevatedButton(
                                     onPressed: () {
                                       Navigator.pushNamed(
-                                          context, '/EventDetails');
+                                          context, '/EventDetails', 
+                                           arguments: {
+                                            'eventName': eventName,
+                                            'eventDescription': eventDescription,
+                                            'eventDate': eventDate!,
+                                            'eventLocation': eventLocation,
+                                          },);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: themeColor,

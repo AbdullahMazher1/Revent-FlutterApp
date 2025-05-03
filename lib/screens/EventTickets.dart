@@ -117,7 +117,7 @@ class _EventsTicketState extends State<EventsTicket> {
               onPressed: () {
                 if (_ticketPriceController.text.isNotEmpty &&
                     selectedCurrency != null) {
-                  // Handle ticket details
+                  
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text('Ticket has been generated.'),
