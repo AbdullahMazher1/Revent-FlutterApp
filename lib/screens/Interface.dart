@@ -107,13 +107,6 @@ class _EventScreenState extends State<EventScreen> {
                 CategoryButton(label: 'Nearby'),
                 CategoryButton(label: 'Latest'),
                 Spacer(),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'View all',
-                    style: TextStyle(color: Colors.purple),
-                  ),
-                ),
               ],
             ),
             SizedBox(height: 10),

@@ -14,7 +14,7 @@ class SignUp extends StatelessWidget {
         children: [
           Center(
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
