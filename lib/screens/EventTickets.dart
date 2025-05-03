@@ -14,7 +14,6 @@ class _EventsTicketState extends State<EventsTicket> {
   @override
   void dispose() {
     _ticketPriceController.dispose();
-    super.dispose();
     _ticketNumberController.dispose();
     super.dispose();
   }
@@ -116,20 +115,19 @@ class _EventsTicketState extends State<EventsTicket> {
             ElevatedButton(
               onPressed: () {
                 if (_ticketPriceController.text.isNotEmpty &&
+                    _ticketNumberController.text.isNotEmpty &&
                     selectedCurrency != null) {
-                  
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text('Ticket has been generated.'),
                     ),
                   );
-                  print(
-                      "Ticket Price: \${_ticketPriceController.text} \${selectedCurrency}");
                   _generateEventTicket();
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('Please enter ticket price and currency.'),
+                      content: Text(
+                          'Please enter ticket price, number of tickets and currency.'),
                     ),
                   );
                 }
@@ -157,6 +155,8 @@ class _EventsTicketState extends State<EventsTicket> {
   }
 
   void _generateEventTicket() {
-    Navigator.pop(context);
+    Navigator.pop(context, {
+      'numberOfTickets': _ticketNumberController.text,
+    });
   }
 }
