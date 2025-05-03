@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 String eventName = "";
 String eventDescription = "";
+DateTime? eventDate;
+String eventLocation = "";
 
 class Events extends StatefulWidget {
   @override
@@ -81,8 +81,6 @@ class _EventsState extends State<Events> {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                 ),
-                groupId: const Icon(Icons.person,
-                    color: Color.fromARGB(255, 176, 116, 231)),
               ),
             ),
             Padding(
@@ -151,7 +149,6 @@ class _EventsDispState extends State<EventsDisp> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 20),
                 Text(
                   'Give your',
                   style: GoogleFonts.inter(
@@ -273,7 +270,6 @@ class _EventsDateState extends State<EventsDate> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 10),
                 Text(
                   'Give your',
                   style: GoogleFonts.inter(
@@ -356,7 +352,7 @@ class _EventsDateState extends State<EventsDate> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color.fromARGB(255, 243, 243, 243),
         onPressed: () {
-          //_selectedDate
+          eventDate = _selectedDate;
           Navigator.pushNamed(context, '/EventsLocation');
         },
         child: const Icon(
@@ -377,6 +373,14 @@ class EventsLocation extends StatefulWidget {
 }
 
 class _EventsLocationState extends State<EventsLocation> {
+  TextEditingController _eventLocationController = TextEditingController();
+
+  @override
+  void dispose() {
+    _eventLocationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -387,14 +391,14 @@ class _EventsLocationState extends State<EventsLocation> {
           children: [
             Image.asset(
               'assets/images/location.png',
-              height: 300.0,
-              width: 300.0,
+              width: 300,
+              height: 320,
+              fit: BoxFit.cover,
             ),
-            const SizedBox(height: 0),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 0),
                 Text(
                   'Give your',
                   style: GoogleFonts.inter(
@@ -412,41 +416,31 @@ class _EventsLocationState extends State<EventsLocation> {
                   ),
                 ),
                 Text(
-                  'a Location',
+                  'a location',
                   style: GoogleFonts.inter(
                     fontSize: 18,
                     color: const Color(0xFF333333),
                     fontWeight: FontWeight.w800,
                   ),
-                ),
+                )
               ],
             ),
             const SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50),
-              child: GestureDetector(
-                child: Container(
-                  height: 50,
-                  width: 270,
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 176, 116, 231)),
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 0),
+              child: TextField(
+                controller: _eventLocationController,
+                decoration: const InputDecoration(
+                  label: Text(
+                    'Where will it be?',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Color.fromARGB(255, 110, 110, 110),
+                    ),
                   ),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Tap to select the location',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Icon(Icons.location_on,
-                          color: Color.fromARGB(255, 176, 116, 231)),
-                    ],
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                 ),
               ),
@@ -457,7 +451,7 @@ class _EventsLocationState extends State<EventsLocation> {
                 children: [
                   const SizedBox(height: 20),
                   LinearProgressIndicator(
-                    value: 1,
+                    value: 1.00,
                     backgroundColor: Colors.grey[200],
                     valueColor:
                         const AlwaysStoppedAnimation<Color>(Color(0xFF8C54B8)),
@@ -471,8 +465,22 @@ class _EventsLocationState extends State<EventsLocation> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color.fromARGB(255, 243, 243, 243),
         onPressed: () {
-          //_selectedLocation
-          Navigator.pushNamed(context, '/EventsTicket');
+         ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Event has been generated.'),
+            ),
+          );
+          eventLocation = _eventLocationController.text;
+          Navigator.pushNamed(
+            context,
+            '/UserScreen',
+            arguments: {
+              'eventName': eventName,
+              'eventDescription': eventDescription,
+              'eventDate': eventDate!,
+              'eventLocation': eventLocation,
+            },
+          );
         },
         child: const Icon(
           Icons.arrow_forward,
@@ -485,3 +493,4 @@ class _EventsLocationState extends State<EventsLocation> {
     );
   }
 }
+

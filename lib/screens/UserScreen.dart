@@ -16,6 +16,19 @@ class _UserScreenState extends State<UserScreen> {
   String currentBio = 'Hey! I am using Revent.';
   String currentProfilePic = 'assets/images/p.jpg';
 
+  String eventName = ''; 
+  String eventDescription = ''; 
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+    if (args != null) {
+      eventName = args['eventName'] ?? '';
+      eventDescription = args['eventDescription'] ?? '';
+    }
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -162,7 +175,7 @@ class _UserScreenState extends State<UserScreen> {
                   ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: 3,
+                    itemCount: 1,
                     itemBuilder: (context, index) {
                       return MouseRegion(
                         cursor: SystemMouseCursors.click,
@@ -188,7 +201,9 @@ class _UserScreenState extends State<UserScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Event Title ${index + 1}',
+                                    eventName.isEmpty
+                                        ? 'Event Title ${index + 1}'
+                                        : eventName,  // Use eventName if available
                                     style: GoogleFonts.inter(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w700,
@@ -199,7 +214,9 @@ class _UserScreenState extends State<UserScreen> {
                               ),
                               SizedBox(height: 5),
                               Text(
-                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum. Donec vehicula.',
+                                eventDescription.isEmpty
+                                    ? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum. Donec vehicula.'
+                                    : eventDescription,  // Use eventDescription if available
                                 style: GoogleFonts.poppins(
                                   fontSize: 14,
                                   color: Colors.grey[700],
