@@ -7,6 +7,7 @@ import 'screens/Interface.dart';
 import 'screens/Event.dart';
 import 'screens/UserScreen.dart';
 import 'screens/EventDetails.dart';
+import 'screens/ChatScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -35,6 +37,7 @@ class MyApp extends StatelessWidget {
         '/UserScreen': (context) => UserScreen(),
         '/EventDetails': (context) => EventDetails(),
         '/EventTickets': (context) => EventsTicket(),
+        '/ChatScreen': (content) => ChatScreen(),
       },
     );
   }
