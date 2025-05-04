@@ -61,7 +61,15 @@ class _EventScreenState extends State<EventScreen> {
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 16.0),
-            child: Icon(Icons.notifications, color: Colors.purple),
+            child: IconButton(
+              icon: Icon(Icons.chat_bubble_outline, color: Colors.purple),
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  '/ChatScreen',
+                );
+              },
+            ),
           ),
         ],
       ),
@@ -107,13 +115,6 @@ class _EventScreenState extends State<EventScreen> {
                 CategoryButton(label: 'Nearby'),
                 CategoryButton(label: 'Latest'),
                 Spacer(),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'View all',
-                    style: TextStyle(color: Colors.purple),
-                  ),
-                ),
               ],
             ),
             SizedBox(height: 10),

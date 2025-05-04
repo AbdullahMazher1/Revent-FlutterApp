@@ -1,11 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
-class EventDetails extends StatelessWidget {
-  final Color themeColor = const Color(0xFF8C54B8); // Theme Color
+class EventDetails extends StatefulWidget {
+  @override
+  _EventDetailsState createState() => _EventDetailsState();
+}
+
+class _EventDetailsState extends State<EventDetails> {
+  final Color themeColor = const Color(0xFF8C54B8);
+
+  String eventName = '';
+  String eventDescription = '';
+  DateTime eventDate = DateTime.now();
+  String eventLocation = '';
+  int numberOfTickets = 0; 
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+
+    if (args != null) {
+      eventName = args['eventName'] ?? eventName;  
+      eventDescription = args['eventDescription'] ?? eventDescription;
+      eventDate = args['eventDate'] ?? eventDate;
+      eventLocation = args['eventLocation'] ?? eventLocation;
+      
+      numberOfTickets = args['numberOfTickets'] ?? numberOfTickets;
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -43,7 +66,7 @@ class EventDetails extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  'Event Poster',
+                  'Upload Event Poster',
                   style: GoogleFonts.poppins(
                     fontSize: 18,
                     color: Colors.black54,
@@ -53,7 +76,7 @@ class EventDetails extends StatelessWidget {
             ),
             SizedBox(height: 15),
             Text(
-              'Lahore Youth Festival - 2025',
+              eventName,
               style: GoogleFonts.poppins(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -62,7 +85,7 @@ class EventDetails extends StatelessWidget {
             ),
             SizedBox(height: 5),
             Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo justo et dolor ullamcorper, sed laoreet elit varius.',
+              eventDescription,
               style: GoogleFonts.poppins(
                 fontSize: 16,
                 color: Colors.grey[700],
@@ -74,7 +97,7 @@ class EventDetails extends StatelessWidget {
                 Icon(Icons.calendar_today, color: themeColor, size: 20),
                 SizedBox(width: 6),
                 Text(
-                  'Date & Time: September 10, 2024',
+                  'Date & Time: ${DateFormat('MMMM dd, yyyy – hh:mm a').format(eventDate)}',
                   style: GoogleFonts.poppins(
                     fontSize: 15,
                     color: Colors.black,
@@ -88,7 +111,7 @@ class EventDetails extends StatelessWidget {
                 Icon(Icons.access_time, color: themeColor, size: 20),
                 SizedBox(width: 6),
                 Text(
-                  'Created On: August 20, 2024',
+                  'Created On: May 5, 2025', // Don't change
                   style: GoogleFonts.poppins(
                     fontSize: 15,
                     color: Colors.black,
@@ -102,7 +125,7 @@ class EventDetails extends StatelessWidget {
                 Icon(Icons.airplay, color: themeColor, size: 20),
                 SizedBox(width: 6),
                 Text(
-                  'Tickets Sold: 122/200',
+                  'Tickets Available: $numberOfTickets',
                   style: GoogleFonts.poppins(
                     fontSize: 15,
                     color: Colors.black,
@@ -116,7 +139,7 @@ class EventDetails extends StatelessWidget {
                 Icon(Icons.location_on, color: themeColor, size: 20),
                 SizedBox(width: 6),
                 Text(
-                  'Location: Grand Hall, Downtown',
+                  'Location: $eventLocation',
                   style: GoogleFonts.poppins(
                     fontSize: 15,
                     color: Colors.black,
