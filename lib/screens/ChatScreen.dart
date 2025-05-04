@@ -206,9 +206,9 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
   void initState() {
     super.initState();
 
-    // Add sender's initial message
+    // Default message for each user
     messages.add({
-      'text': 'Oye gazi chwon ana he?', // sender's message
+      'text': widget.lastMessage,
       'isMe': false,
     });
   }
@@ -218,7 +218,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
       setState(() {
         messages.add({
           'text': controller.text.trim(),
-          'isMe': true, // your message
+          'isMe': true,
         });
         controller.clear();
       });
@@ -260,12 +260,14 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                 final isMe = msg['isMe'] == true;
 
                 return Align(
-                  alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+                  alignment:
+                      isMe ? Alignment.centerRight : Alignment.centerLeft,
                   child: Container(
                     margin: const EdgeInsets.symmetric(vertical: 4),
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: isMe ? Color(0xFF8C54B8) : Colors.grey.shade300,
+                      color:
+                          isMe ? Color(0xFF8C54B8) : Colors.grey.shade300,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Text(
@@ -292,8 +294,8 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                       hintStyle: GoogleFonts.poppins(fontSize: 14),
                       filled: true,
                       fillColor: Colors.grey.shade100,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                      contentPadding: EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 10),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
