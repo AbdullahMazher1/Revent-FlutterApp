@@ -21,6 +21,19 @@ class _EventScreenState extends State<EventScreen> {
     });
   }
 
+  void _navigateToEventDetails2(String imageUrl, String title, String location) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EventDetails2(
+          imageUrl: imageUrl,
+          title: title,
+          location: location,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,10 +77,7 @@ class _EventScreenState extends State<EventScreen> {
             child: IconButton(
               icon: Icon(Icons.chat_bubble_outline, color: Colors.purple),
               onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  '/ChatScreen',
-                );
+                Navigator.pushNamed(context, '/ChatScreen');
               },
             ),
           ),
@@ -78,20 +88,14 @@ class _EventScreenState extends State<EventScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Explore the world!',
-              style: GoogleFonts.poppins(
-                fontSize: 14,
-                color: Colors.grey,
-              ),
-            ),
+            Text('Explore the world!',
+                style: GoogleFonts.poppins(fontSize: 14, color: Colors.grey)),
             SizedBox(height: 10),
             TextField(
               decoration: InputDecoration(
                 hintText: 'Search for events',
                 prefixIcon: Icon(Icons.search, color: Colors.grey),
-                suffixIcon:
-                    Icon(Icons.filter_alt_outlined, color: Colors.purple),
+                suffixIcon: Icon(Icons.filter_alt_outlined, color: Colors.purple),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide(color: Colors.purple),
@@ -109,7 +113,6 @@ class _EventScreenState extends State<EventScreen> {
             ),
             SizedBox(height: 10),
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 CategoryButton(label: 'Most Viewed', isSelected: true),
                 CategoryButton(label: 'Nearby'),
@@ -120,10 +123,17 @@ class _EventScreenState extends State<EventScreen> {
             SizedBox(height: 10),
             Column(
               children: [
-                EventCard(
-                  imageUrl: 'assets/images/main.jpg',
-                  title: 'Marriage Ceremony',
-                  location: 'Queen Hall, Johar Town',
+                GestureDetector(
+                  onTap: () => _navigateToEventDetails2(
+                    'assets/images/main.jpg',
+                    'Marriage Ceremony',
+                    'Queen Hall, Johar Town',
+                  ),
+                  child: EventCard(
+                    imageUrl: 'assets/images/main.jpg',
+                    title: 'Marriage Ceremony',
+                    location: 'Queen Hall, Johar Town',
+                  ),
                 ),
                 SizedBox(height: 20),
                 SingleChildScrollView(
@@ -137,7 +147,8 @@ class _EventScreenState extends State<EventScreen> {
                           imageUrl: 'assets/images/b.jpg',
                           title: 'Music Festival'),
                       RelatedEventCard(
-                          imageUrl: 'assets/images/c.jpg', title: 'Food Fair'),
+                          imageUrl: 'assets/images/c.jpg',
+                          title: 'Food Fair'),
                       RelatedEventCard(
                           imageUrl: 'assets/images/a.jpg',
                           title: 'Birthday Ceremony'),
@@ -145,16 +156,30 @@ class _EventScreenState extends State<EventScreen> {
                   ),
                 ),
                 SizedBox(height: 20),
-                EventCard(
-                  imageUrl: 'assets/images/z1.jpg',
-                  title: 'Live Concert',
-                  location: 'Open Air Theatre, Downtown',
+                GestureDetector(
+                  onTap: () => _navigateToEventDetails2(
+                    'assets/images/z1.jpg',
+                    'Live Concert',
+                    'Open Air Theatre, Downtown',
+                  ),
+                  child: EventCard(
+                    imageUrl: 'assets/images/z1.jpg',
+                    title: 'Live Concert',
+                    location: 'Open Air Theatre, Downtown',
+                  ),
                 ),
                 SizedBox(height: 10),
-                EventCard(
-                  imageUrl: 'assets/images/z2.jpg',
-                  title: 'Art Exhibition',
-                  location: 'City Art Gallery',
+                GestureDetector(
+                  onTap: () => _navigateToEventDetails2(
+                    'assets/images/z2.jpg',
+                    'Art Exhibition',
+                    'City Art Gallery',
+                  ),
+                  child: EventCard(
+                    imageUrl: 'assets/images/z2.jpg',
+                    title: 'Art Exhibition',
+                    location: 'City Art Gallery',
+                  ),
                 ),
               ],
             ),
@@ -313,6 +338,175 @@ class RelatedEventCard extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class EventDetails2 extends StatefulWidget {
+  final String imageUrl;
+  final String title;
+  final String location;
+
+  const EventDetails2({
+    required this.imageUrl,
+    required this.title,
+    required this.location,
+  });
+
+  @override
+  _EventDetails2State createState() => _EventDetails2State();
+}
+
+class _EventDetails2State extends State<EventDetails2> {
+  String buttonText = 'Register Event';
+
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+
+  void _showRegistrationSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+            top: 20,
+            left: 20,
+            right: 20,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Register for Event',
+                  style: GoogleFonts.poppins(
+                      fontSize: 18, fontWeight: FontWeight.bold)),
+              SizedBox(height: 12),
+              TextField(
+                controller: nameController,
+                decoration: InputDecoration(labelText: 'Name'),
+              ),
+              TextField(
+                controller: emailController,
+                decoration: InputDecoration(labelText: 'Email'),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  if (nameController.text.isNotEmpty &&
+                      emailController.text.isNotEmpty) {
+                    setState(() {
+                      buttonText = 'Registered';
+                    });
+                    Navigator.pop(context);
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF8C54B8),
+                ),
+                child: Text('OK',
+                    style: GoogleFonts.poppins(
+                        color: Colors.white, fontWeight: FontWeight.w600)),
+              ),
+              SizedBox(height: 20),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Event Details", style: GoogleFonts.poppins()),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.asset(
+                widget.imageUrl,
+                height: 250,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              widget.title,
+              style: GoogleFonts.poppins(
+                  fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 8),
+            Row(
+              children: [
+                Icon(Icons.location_on, color: Colors.purple),
+                SizedBox(width: 5),
+                Text(widget.location, style: GoogleFonts.poppins()),
+              ],
+            ),
+            SizedBox(height: 8),
+            Row(
+              children: [
+                Icon(Icons.calendar_today, color: Colors.purple),
+                SizedBox(width: 5),
+                Text("12th Dec 2025", style: GoogleFonts.poppins()),
+              ],
+            ),
+            SizedBox(height: 8),
+            Row(
+              children: [
+                Icon(Icons.access_time, color: Colors.purple),
+                SizedBox(width: 5),
+                Text("7:00 PM", style: GoogleFonts.poppins()),
+              ],
+            ),
+            SizedBox(height: 16),
+            Text(
+              "About the Event",
+              style: GoogleFonts.poppins(
+                  fontSize: 16, fontWeight: FontWeight.w600),
+            ),
+            SizedBox(height: 8),
+            Text(
+              "This is a dummy event description. Enjoy music, fun, and food at the event. Make sure to register and grab your seat!",
+              style: GoogleFonts.poppins(),
+            ),
+            SizedBox(height: 20),
+            MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: ElevatedButton(
+                onPressed: () {
+                  _showRegistrationSheet(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(190, 48),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  backgroundColor: const Color(0xFF8C54B8),
+                ),
+                child: Text(
+                  buttonText,
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

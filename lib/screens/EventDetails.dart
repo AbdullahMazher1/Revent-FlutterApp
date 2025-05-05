@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class EventDetails extends StatefulWidget {
   @override
@@ -14,18 +16,28 @@ class _EventDetailsState extends State<EventDetails> {
   String eventDescription = '';
   DateTime eventDate = DateTime.now();
   String eventLocation = '';
-  int numberOfTickets = 0; 
+  int numberOfTickets = 0;
+
+  File? _pickedImage;
+
+  Future<void> _pickImageFromGallery() async {
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _pickedImage = File(pickedFile.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
 
     if (args != null) {
-      eventName = args['eventName'] ?? eventName;  
+      eventName = args['eventName'] ?? eventName;
       eventDescription = args['eventDescription'] ?? eventDescription;
       eventDate = args['eventDate'] ?? eventDate;
       eventLocation = args['eventLocation'] ?? eventLocation;
-      
       numberOfTickets = args['numberOfTickets'] ?? numberOfTickets;
     }
 
@@ -57,23 +69,37 @@ class _EventDetailsState extends State<EventDetails> {
               ],
             ),
             SizedBox(height: 10),
-            Container(
-              height: 200,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: themeColor.withOpacity(0.2),
-              ),
-              child: Center(
-                child: Text(
-                  'Upload Event Poster',
-                  style: GoogleFonts.poppins(
-                    fontSize: 18,
-                    color: Colors.black54,
-                  ),
+
+            /// Clickable Container with Image Picker
+            GestureDetector(
+              onTap: _pickImageFromGallery,
+              child: Container(
+                height: 200,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: themeColor.withOpacity(0.2),
+                  image: _pickedImage != null
+                      ? DecorationImage(
+                          image: FileImage(_pickedImage!),
+                          fit: BoxFit.cover,
+                        )
+                      : null,
                 ),
+                child: _pickedImage == null
+                    ? Center(
+                        child: Text(
+                          'Upload Event Poster',
+                          style: GoogleFonts.poppins(
+                            fontSize: 18,
+                            color: Colors.black54,
+                          ),
+                        ),
+                      )
+                    : null,
               ),
             ),
+
             SizedBox(height: 15),
             Text(
               eventName,
@@ -111,7 +137,7 @@ class _EventDetailsState extends State<EventDetails> {
                 Icon(Icons.access_time, color: themeColor, size: 20),
                 SizedBox(width: 6),
                 Text(
-                  'Created On: May 5, 2025', // Don't change
+                  'Created On: May 5, 2025',
                   style: GoogleFonts.poppins(
                     fontSize: 15,
                     color: Colors.black,
